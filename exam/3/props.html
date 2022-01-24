@@ -1,0 +1,9 @@
+<!-- 
+가장 기본적인 데이터 전달 방법은 상위(부모) -> 하위(자식)
+상위 component ->(props 전달) -> 하위 component -> (이벤트 발생) -> 상위 component 
+-->
+
+<!-- props 속성을 원하면 하위 컴포넌트 속성에 정의 -->
+    Vue.component('child-coomponent', {props:['props 속성 이름'],});
+<!-- 그 다음 상위 component의 html 코드에 등록된 child-component 태그에 v-bind 속성 추가     -->
+    <child-component v-bind:props 속성 이름 ="상위 컴포넌트 data 속성"></child-component>

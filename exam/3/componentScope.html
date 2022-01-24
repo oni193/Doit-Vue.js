@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Vue Component Scope</title>
+  </head>
+  <body>
+    <div id="app">
+      <my-component1></my-component1>
+      <my-component2></my-component2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    
+    <script>
+      // 첫 번째 컴포넌트 내용
+      var cmp1 = {
+        template: '<div>첫 번째 지역 컴포넌트 : {{ cmp1Data }}</div>',
+        data: function() {
+          return {
+            cmp1Data : 100
+          }
+        }
+      };
+
+      // 두 번째 컴포넌트 내용
+      const cmp2 = {
+        template: '<div>두 번째 지역 컴포넌트 : {{ cmp2Data }}</div>',
+        data: function() {
+          return {
+            cmp2Data : cmp1.data.cmp1Data
+          }
+        }
+      };
+
+      new Vue({
+        el: '#app',
+        // 지역 컴포넌트 등록
+        components: {
+          'my-component1': cmp1,
+          'my-component2': cmp2
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 
+cmp2가 data를 못받는 이유는 cmp1의 값을 직접 참조할 수 없기 때문. 
+컴포넌트의 유효 범위로 인해 직접 접근하지 못하기에 생기는 결과. 
+개발자 개개인 스타일로 구성 x 모두 동일한 데이터 흐름 
+-->
